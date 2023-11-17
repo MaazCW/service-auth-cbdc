@@ -1,0 +1,5 @@
+FROM openjdk:8-jdk-alpine
+EXPOSE 8282
+COPY config /config
+ADD service-auth-1.0.0.jar service-auth-1.0.0.jar
+ENTRYPOINT ["nohup","java","-XX:+UseG1GC","-Xms256m","-Xmx1024m","-Dname=service-auth-ans","-jar","service-auth-1.0.0.jar","--Dserver.port=8282","--spring.config.location=/config/application.properties","&"]
